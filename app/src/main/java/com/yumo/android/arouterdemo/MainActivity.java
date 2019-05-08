@@ -3,6 +3,7 @@ package com.yumo.android.arouterdemo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,7 +85,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            ARouter.getInstance().build("/modulea/AActivity").navigation();
         } else if (id == R.id.nav_gallery) {
+            Fragment fragment = (Fragment) ARouter.getInstance().build("/modulea/AAFragment").navigation();
+            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment, "test").commit();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -93,7 +99,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

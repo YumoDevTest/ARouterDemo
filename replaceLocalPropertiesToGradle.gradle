@@ -1,0 +1,26 @@
+
+println project.name
+replaceGradlePropertiesByLocal()
+
+def replaceGradlePropertiesByLocal(){
+    println project.name+"relaceGradlePropertiesByLocal"
+
+    InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
+    Properties properties = new Properties()
+    properties.load(inputStream)
+    inputStream.close()
+
+
+    InputStream inputStream1 = rootProject.file('gradle.properties').newDataInputStream()
+    Properties gradleProperties = new Properties()
+    gradleProperties.load(inputStream1)
+    inputStream1.close()
+
+
+    for (String key : gradleProperties.stringPropertyNames()){
+        if (properties.containsKey(key)){
+            println key+" "+properties.getProperty(key)
+            project[key] = properties.getProperty(key)
+        }
+    }
+}

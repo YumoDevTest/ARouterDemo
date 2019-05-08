@@ -2,13 +2,21 @@
 
 buildscript {
     repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+        }
         google()
         jcenter()
         
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
-        
+        classpath "com.alibaba:arouter-register:1.0.2"
+
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -16,12 +24,43 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+        }
         google()
         jcenter()
-        
     }
+
+    //parseLocalProperties()
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext{
+    arouter_api = 'com.alibaba:arouter-api:1.4.0'
+    arouter_compiler = 'com.alibaba:arouter-compiler:1.2.1'
+}
+
+
+
+def parseLocalProperties(){
+    File file = rootProject.file('local.properties')
+    if(file.exists()){
+        InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
+        Properties properties = new Properties()
+        properties.load(inputStream)
+        println properties
+        println project.name
+        if(properties.containsKey("app_lib")){
+            println 'packageName:'+properties.getProperty("app_lib")
+            ext.app_lib = properties.getProperty("app_lib")
+            //project["app_lib"] = properties.getProperty("app_lib")
+            println 'packageName:'+project["app_lib"]
+        }
+    }
 }

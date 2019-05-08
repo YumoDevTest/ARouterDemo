@@ -1,0 +1,37 @@
+
+println project.name
+
+configurations {
+    println project.name+"configurations doBefore"
+    //replaceGradlePropertiesByLocal()
+    doBefore{
+        println project.name+"configurations doBefore"
+        //project['app_lib'] = true
+    }
+    doLast {
+        println project.name+"configurations doLast"
+    }
+}
+
+def replaceGradlePropertiesByLocal(){
+    println project.name+"relaceGradlePropertiesByLocal"
+
+    InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
+    Properties properties = new Properties()
+    properties.load(inputStream)
+    inputStream.close()
+
+
+    InputStream inputStream1 = rootProject.file('gradle.properties').newDataInputStream()
+    Properties gradleProperties = new Properties()
+    gradleProperties.load(inputStream1)
+    inputStream1.close()
+
+
+    for (String key : gradleProperties.stringPropertyNames()){
+        if (properties.containsKey(key)){
+            println key+" "+properties.getProperty(key)
+            project[key] = properties.getProperty(key)
+        }
+    }
+}
