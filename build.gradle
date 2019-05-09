@@ -44,6 +44,8 @@ task clean(type: Delete) {
 ext{
     arouter_api = 'com.alibaba:arouter-api:1.4.0'
     arouter_compiler = 'com.alibaba:arouter-compiler:1.2.1'
+    doraemonkit = 'com.didichuxing.doraemonkit:doraemonkit:1.1.6'
+    doraemonkit_no_op = 'com.didichuxing.doraemonkit:doraemonkit-no-op:1.1.6'
 }
 
 

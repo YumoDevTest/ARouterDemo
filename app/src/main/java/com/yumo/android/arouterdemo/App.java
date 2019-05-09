@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.Build;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.didichuxing.doraemonkit.DoraemonKit;
 
 public class App extends Application {
 
@@ -16,5 +17,6 @@ public class App extends Application {
         }
 
         ARouter.init(this);
+        DoraemonKit.install(this);
     }
 }

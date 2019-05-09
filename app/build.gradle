@@ -7,7 +7,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.yumo.android.arouterdemo"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -40,6 +40,8 @@ dependencies {
     }
     compile rootProject.ext.arouter_api
     annotationProcessor rootProject.ext.arouter_compiler
+    debugImplementation rootProject.ext.doraemonkit
+    releaseImplementation rootProject.ext.doraemonkit_no_op
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
